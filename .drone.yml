@@ -7,6 +7,9 @@ pipeline:
     email: ops@theodysseyonline.com
     repo: odyssey/${DRONE_REPO_NAME}
     tag: ${DRONE_BRANCH/\//_}_${DRONE_COMMIT:0:8},${DRONE_BRANCH/\//_}
+    build_args:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
   docker-publish-latest:
     image: plugins/docker
@@ -17,6 +20,9 @@ pipeline:
     tag: latest
     when:
       branch: ['master']
+    build_args:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
 
   slack:
