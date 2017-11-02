@@ -1,0 +1,37 @@
+pipeline:
+
+  docker-publish-default:
+    image: plugins/docker
+    username: odysseyops
+    password: Password123!
+    email: ops@theodysseyonline.com
+    repo: odyssey/${DRONE_REPO_NAME}
+    tag: ${DRONE_BRANCH/\//_}_${DRONE_COMMIT:0:8},${DRONE_BRANCH/\//_}
+
+  docker-publish-latest:
+    image: plugins/docker
+    username: odysseyops
+    password: Password123!
+    email: ops@theodysseyonline.com
+    repo: odyssey/${DRONE_REPO_NAME}
+    tag: latest
+    when:
+      branch: ['master']
+
+
+  slack:
+    image: plugins/slack
+    webhook: https://hooks.slack.com/services/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
+    channel: product-builds
+    username: drone-bot
+    icon_url: https://unsplash.it/256/256/?random
+    when:
+      status: [ success, failure ]
+    template: >
+      {{#success build.status}}
+        {{repo.name}}: build {{build.number}} succeeded. Good job @{{build.author}}.
+        {{build.link}}
+      {{else}}
+        {{repo.name}}: build {{build.number}} failed. Help me @{{build.author}}, you're my only hope.
+        {{build.link}}
+      {{/success}}

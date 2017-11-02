@@ -1,5 +1,5 @@
 # this base image contains the necessary things for both yarn and npm
-FROM odyssey/node-base:8.0.0
+FROM node:8
 
 # setup awscli
 RUN apt-get update -q
