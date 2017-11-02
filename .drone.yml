@@ -10,6 +10,7 @@ pipeline:
     environment:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    secrets: [ AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY ]
 
   docker-publish-latest:
     image: plugins/docker
