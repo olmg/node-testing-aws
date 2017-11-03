@@ -7,7 +7,7 @@ pipeline:
     email: ops@theodysseyonline.com
     repo: odyssey/${DRONE_REPO_NAME}
     tag: ${DRONE_BRANCH/\//_}_${DRONE_COMMIT:0:8},${DRONE_BRANCH/\//_}
-    environment:
+    build_args:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     secrets: [ AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY ]
@@ -21,9 +21,10 @@ pipeline:
     tag: latest
     when:
       branch: ['master']
-    environment:
+    build_args:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    secrets: [ AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY ]
 
 
   slack:
