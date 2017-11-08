@@ -1,5 +1,5 @@
 # this base image contains the necessary things for both yarn and npm
-FROM node:8
+FROM node:8.9
 
 # setup awscli
 RUN apt-get update -q
